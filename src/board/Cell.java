@@ -6,7 +6,7 @@ public class Cell {
 	/**
 	 * Cell Object.  Specifically instantiated by AliveCell and DeadCell in this particular Project.
 	 * Contains a Rules.
-	
+	*/
 	
 	Rules rule = new Rules();
 	
