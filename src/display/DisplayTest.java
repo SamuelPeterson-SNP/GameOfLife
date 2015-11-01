@@ -13,7 +13,7 @@ public class DisplayTest {
 		String actual;
 		String expected;
 		Board B = new Board();
-		B.AddCell(new AliveCell(1,1));
+		B.AddCell(new AliveCell(), new Location(1,1));
 		
 		
 		actual = D.GetBoardString(B);

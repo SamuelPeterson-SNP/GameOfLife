@@ -6,8 +6,8 @@ public class DeadCell extends Cell {
 	
 	
 	
-	public DeadCell(int XCoord, int YCoord) {
-		super(XCoord, YCoord);
+	public DeadCell() {
+		
 
 	}
 	
@@ -22,9 +22,7 @@ public class DeadCell extends Cell {
 		return rule.BirthRule(count);
 	}
 	
-	public DeadCell(Location L){
-		super(L);
-	}
+	
 
 	public int Poll(){
 		/**

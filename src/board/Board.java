@@ -36,14 +36,14 @@ public class Board {
 		return ret;
 	}
 
-	public void AddCell(Cell cell) throws AddCellException {
+	public void AddCell(Cell cell, Location l) throws AddCellException {
 		/**
 		 * Adds the Cell cell to the Map at the location of cell.GetLocation().
 		 * Can only add a cell to a location that has not been mapped already.
 		 * I.E You cannot overwrite an existing cell. 
 		 */
-		if (!cells.containsKey(cell.GetLocation())){
-			cells.put(cell.GetLocation(), cell);
+		if (!cells.containsKey(l)){
+			cells.put(l, cell);
 		}
 		else{
 			throw new AddCellException("Shouldn't be able to add cell.  Location is already occupied");
@@ -105,7 +105,7 @@ public class Board {
 		for (Location l : this.cells.keySet()){
 			tally = this.CountTally(this.Census(l));
 			if (this.cells.get(l).AliveInFuture(tally)){
-				AliveBoard.put(l, new AliveCell(l));
+				AliveBoard.put(l, new AliveCell());
 				if (AliveBoard.size() >= PopulationCap){
 					throw new OverPopulationException("Board is too Crowded");
 				}
@@ -116,7 +116,7 @@ public class Board {
 		
 		for (Location l : AliveBoard.keySet()){
 			for (Location i : l.GetNeighborLocations()){
-				if (!returnBoard.containsKey(i)) returnBoard.put(i, new DeadCell(i));
+				if (!returnBoard.containsKey(i)) returnBoard.put(i, new DeadCell());
 			}
 		}
 		
@@ -133,7 +133,7 @@ public class Board {
 		if (cells.containsKey(L)){
 			return cells.get(L);
 		}
-		return new DeadCell(L);
+		return new DeadCell();
 	}
 	
 	
@@ -141,6 +141,6 @@ public class Board {
 	/**
 	 * Returns true if cells has any Alive nodes, otherwise, returns false	
 	 */
-		return cells.containsValue(new AliveCell(1,1));
+		return cells.containsValue(new AliveCell());
 	}
 }

@@ -3,13 +3,11 @@ package board;
 
 public class AliveCell extends Cell {
 	
-	public AliveCell(int XCoord, int YCoord){
-		super(XCoord,YCoord);
+	public AliveCell(){
+		
 	}
 	
-	public AliveCell(Location L){
-		super(L);
-	}
+
 	
 	
 	public boolean AliveInFuture(int count){

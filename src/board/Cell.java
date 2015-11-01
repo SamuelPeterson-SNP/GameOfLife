@@ -10,15 +10,13 @@ public class Cell {
 	 * Design Flaw:  Cell should not have a location field.  Will correct that in next version.  Location of
 	 * Cell should be managed solely in the Board Field.
 	 */
-	private Location location;
+	
 	Rules rule = new Rules();
 	
-	public Cell(int XCoord,int YCoord){
-		this.location = new Location(XCoord,YCoord);
+	public Cell(){
+		
 	}
-	public Cell(Location L){
-		this.location = L;
-	}
+	
 	
 	
 	public int Poll() {
@@ -28,9 +26,7 @@ public class Cell {
 
 	
 
-	public Location GetLocation() {
-		return this.location;
-	}
+	
 	public boolean AliveInFuture(int i) {
 		
 		return false;
