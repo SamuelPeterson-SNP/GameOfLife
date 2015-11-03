@@ -31,9 +31,9 @@ public class AliveCell extends Cell {
 	
 	public String DisplayToken(){
 		/**
-		 * Returns "A"
+		 * Returns "*"
 		 */
-		return "A";
+		return "*";
 	}
 	
 }

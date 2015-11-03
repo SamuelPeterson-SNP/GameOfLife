@@ -3,11 +3,67 @@ package board;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
+
 public class BoardTests {
 	Board board = new Board();
+	AliveCell ALIVE = new AliveCell();
+	DeadCell DEAD = new DeadCell();
+	HashMap<Location, Cell> InitialCells = new HashMap<Location,Cell>();
+	
+	@Test 
+	public void GetAliveCellsTest(){
+		//Tests the method Get Alive Cells, which returns a Hash Map only of the Alive cells in a board
+		
+		//Case1: Empty Board
+		InitialCells = new HashMap<Location, Cell>();
+		Board B1 = new Board(InitialCells);
+		HashMap<Location,Cell> ActualMap = B1.GetAliveCells();
+		HashMap<Location,Cell> ExpectedMap = new HashMap<Location,Cell>();
+		assertEquals(ExpectedMap, ActualMap);
+		
+		//Case2: Only Dead Cells
+		InitialCells.put(new Location(0,0), DEAD);
+		B1 = new Board(InitialCells);
+		ActualMap = B1.GetAliveCells();
+		ExpectedMap = new HashMap<Location,Cell>();
+		assertEquals(ExpectedMap,ActualMap);
+		
+		//Case3: Only Alive Cells
+		InitialCells.put(new Location(0,0), ALIVE);
+		B1 = new Board(InitialCells);
+		ActualMap = B1.GetAliveCells();
+		ExpectedMap = new HashMap<Location,Cell>();
+		ExpectedMap.put(new Location(0,0),ALIVE);
+		assertEquals(ExpectedMap,ActualMap);
+		
+		//Case4: Alive and Dead Cells
+		InitialCells.put(new Location(1,1), DEAD);
+		B1 = new Board(InitialCells);
+		ActualMap = B1.GetAliveCells();
+		ExpectedMap = new HashMap<Location,Cell>();
+		ExpectedMap.put(new Location(0,0), ALIVE);
+		assertEquals(ExpectedMap,ActualMap);
+	}
+	
+	@Test
+	public void BoardEqualityTest(){
+		// Test Case 1:   two Boards that have the same alive cells but different Explicitly mapped DeadCells are considered equal
+		InitialCells = new HashMap<Location, Cell>();
+		InitialCells.put(new Location(0,0), ALIVE);
+		
+		Board B1 = new Board(InitialCells);
+		
+		InitialCells.put(new Location(10,10), DEAD);
+		
+		Board B2 = new Board(InitialCells);
+		
+		assertEquals(B1, B2);
+	}
+	
 	@Test
 	public void TallyTest() {
 		
@@ -273,6 +329,23 @@ public class BoardTests {
 		B.AddCell(new DeadCell(), new Location(1,0));
 		B.AddCell(new DeadCell(), new Location(2,0));
 		assertEquals(test,B);
+		
+		//Test 4 Three staggered: Alive Cells at (0,0) (1,1) (2,0).  Should result in a board: (1,0) (1,1)
+		InitialCells = new HashMap<Location,Cell>();
+		InitialCells.put(new Location(0,0), ALIVE);
+		InitialCells.put(new Location(1,1), ALIVE);
+		InitialCells.put(new Location(2,0), ALIVE);
+		Board B1 = new Board(InitialCells);
+		B1 = B1.NextGeneration();
+		
+		InitialCells = new HashMap<Location,Cell>();
+		InitialCells.put(new Location(1,0), ALIVE);
+		InitialCells.put(new Location(1,1), ALIVE);
+		Board B2 = new Board(InitialCells);
+		
+		
+		
+		assertEquals(B1,B2);
 		
 	}
 

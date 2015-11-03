@@ -33,8 +33,8 @@ public class DeadCell extends Cell {
 	
 	public String DisplayToken(){
 		/**
-		 * Returns "D"
+		 * Returns "_"
 		 */
-		return "D";
+		return "_";
 	}
 }
